@@ -1,4 +1,52 @@
+.container {
+  height: 450px;
+  width: 350px;
+  background-color: lightgray;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
 
+#display {
+  width: 320px;
+  height: 60px;
+  display: flex;
+  align-self: center;
+  border: 0;
+}
 
+#displayAnswer {
+  width: 325px;
+  height: 30px;
+  border-top: 1px solid black;
+  display: flex;
+  align-self: center;
+  background-color: white;
+  margin-bottom: 30px;
+}
 
+button {
+  padding: 20px;
+}
+
+.allButtons {
+  display: flex;
+  flex-direction: row;
+  margin-left: 12px;
+  justify-content: space-between;
+}
+
+#numbers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 300px;
+}
+
+.allOperators {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: 12px;
+}
 

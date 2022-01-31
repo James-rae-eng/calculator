@@ -1,31 +1,74 @@
 
+function add(array) {
+    let output = array.reduce((a, b) => a + b);
+    return output;}
+
+function subtract(array) {
+    let output = array.reduce((a, b) => a - b);
+    return output;}
+
+function divide(array) {
+    let output = array.reduce((a, b) => a / b);
+    return output;}
+
+function multiply(array) {
+    let output = array.reduce((a, b) => a * b);
+    return output;}
 
 
-
-/*color button
-let colorToggle = 0;
-const colorButton = document.getElementById("colorButton");
-colorButton.addEventListener("click", () => {
-    greyToggle = 0;
-    if (colorToggle === 0) {
-        colorToggle = 1;
-        generateGrid();
+function operate(array) {
+    if (array.includes("/")) {
+        let inArray = array.split('/').map(Number);
+        document.getElementById("displayAnswer").innerHTML = divide(inArray);
+    }
+    else if (array.includes("x")) {
+        let inArray = array.split('x').map(Number);
+        document.getElementById("displayAnswer").innerHTML = multiply(inArray);
+    }
+    else if (array.includes("+")) {
+        let inArray = array.split('+').map(Number);
+        document.getElementById("displayAnswer").innerHTML = add(inArray);
+    }
+    else if (array.includes("-")) {
+        let inArray = array.split('-').map(Number);
+        document.getElementById("displayAnswer").innerHTML = subtract(inArray);
     }
     else {
-        colorToggle = 0;
-        generateGrid();
+        return array;
     }
-});
-*/
+}
 
-/*clear button
-const clearButton = document.getElementById("clearButton");
-block.forEach((block) => {
-    clearButton.addEventListener("click", () => {
-        block.setAttribute("style", "background-color:white;")
-    });
-});  
-*/
+
+
+document.querySelector('#numbers').addEventListener('click', event => {
+    let target = event.target;
+    if (target.matches('button')) {
+      let value = target.innerHTML
+      document.querySelector('#display').value += value
+    }
+  });
+
+document.querySelector('#operators').addEventListener('click', event => {
+let target = event.target;
+if (target.matches('button')) {
+    let value = target.innerHTML
+    document.querySelector('#display').value += value
+}
+});
+
+let clearBtn = document.getElementById("clearBtn");
+clearBtn.addEventListener("click", () => {
+    document.querySelector('#display').value = "";
+    document.getElementById("displayAnswer").innerHTML = "";
+});
+
+let equalsBtn = document.getElementById("equalsBtn");
+equalsBtn.addEventListener("click", () => {
+    let input = document.getElementById('display').value;
+    operate(input);
+});
+
+
   
 
 
