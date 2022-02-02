@@ -20,6 +20,7 @@ function operate(array) {
     if (array.includes("/")) {
         let inArray = array.split('/').map(Number);
         document.getElementById("displayAnswer").innerHTML = divide(inArray);
+        console.log(inArray);
     }
     else if (array.includes("x")) {
         let inArray = array.split('x').map(Number);
