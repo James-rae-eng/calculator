@@ -69,3 +69,8 @@ button {
   flex: 1;
   padding-left: 48px;
 }
+
+#backBtn {
+  /*fix this*/
+  font-weight: bolder;
+}

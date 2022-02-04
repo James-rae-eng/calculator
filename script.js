@@ -1,6 +1,7 @@
 
 function add(array) {
-    let output = array.reduce((a, b) => a + b);
+    let inNumber = array.map(Number);
+    let output = inNumber.reduce((a, b) => a + b);
     return output;}
 
 function subtract(array) {
@@ -15,28 +16,51 @@ function multiply(array) {
     let output = array.reduce((a, b) => a * b);
     return output;}
 
+function getIndex(index) {
+    if (index > -1) {
+        array.splice(index, 1);
+    }       
+    return index -1;
+}
 
-function operate(array) {
-    if (array.includes("/")) {
-        let inArray = array.split('/').map(Number);
-        document.getElementById("displayAnswer").innerHTML = divide(inArray);
-        console.log(inArray);
+let array;
+
+function operate(arrayInput) {
+    array = arrayInput;
+
+    while (array.length > 1) {
+        if (array[1] === "/") {
+            let index = array.indexOf("/");
+            let newIndex = getIndex(index);
+            let newArray = divide(array.slice(newIndex,2));
+            array.splice(newIndex, 2, newArray);
+        }
+        else if (array[1] === "x") {
+            let index = array.indexOf("x");
+            let newIndex = getIndex(index);
+            let newArray = multiply(array.slice(newIndex,2));
+            array.splice(newIndex, 2, newArray);
+        }
+        else if (array[1] === "+") {
+            let index = array.indexOf("+");
+            let newIndex = getIndex(index);
+            let newArray = add(array.slice(newIndex,2));
+            array.splice(0, 2, newArray);
+        }
+        else if (array[1] === "-") {
+            let index = array.indexOf("-");
+            let newIndex = getIndex(index);
+            let newArray = subtract(array.slice(newIndex,2));
+            array.splice(0, 2, newArray);
+        }
+        else {
+            return array;
+        }
     }
-    else if (array.includes("x")) {
-        let inArray = array.split('x').map(Number);
-        document.getElementById("displayAnswer").innerHTML = multiply(inArray);
-    }
-    else if (array.includes("+")) {
-        let inArray = array.split('+').map(Number);
-        document.getElementById("displayAnswer").innerHTML = add(inArray);
-    }
-    else if (array.includes("-")) {
-        let inArray = array.split('-').map(Number);
-        document.getElementById("displayAnswer").innerHTML = subtract(inArray);
-    }
-    else {
-        return array;
-    }
+    
+    let numAnswer = array[0];
+    endAnswer = +numAnswer.toFixed(3);
+    document.getElementById("displayAnswer").innerHTML = endAnswer;
 }
 
 
@@ -66,7 +90,13 @@ clearBtn.addEventListener("click", () => {
 let equalsBtn = document.getElementById("equalsBtn");
 equalsBtn.addEventListener("click", () => {
     let input = document.getElementById('display').value;
-    operate(input);
+    let outputArray = input.match(/\d+\.\d+|\d+|[^0-9]/g);
+    if (outputArray.includes(".",".")) {
+        document.getElementById("displayAnswer").innerHTML = "Too many decimals";
+    }
+    else {
+        operate(outputArray);
+    }
 });
 
 
