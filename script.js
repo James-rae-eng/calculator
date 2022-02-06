@@ -87,8 +87,13 @@ clearBtn.addEventListener("click", () => {
     document.getElementById("displayAnswer").innerHTML = "";
 });
 
-let equalsBtn = document.getElementById("equalsBtn");
-equalsBtn.addEventListener("click", () => {
+let backBtn = document.getElementById("backBtn");
+backBtn.addEventListener("click", () => {
+    let input = document.getElementById('display').value;
+    document.querySelector('#display').value = input.substr(0, input.length -1);
+});
+
+function equals() {
     let input = document.getElementById('display').value;
     let outputArray = input.match(/\d+\.\d+|\d+|[^0-9]/g);
     if (outputArray.includes(".",".")) {
@@ -96,6 +101,17 @@ equalsBtn.addEventListener("click", () => {
     }
     else {
         operate(outputArray);
+    }
+}
+
+let equalsBtn = document.getElementById("equalsBtn");
+equalsBtn.addEventListener("click", () => {
+    equals();
+});
+
+document.querySelector('#display').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      equals();
     }
 });
 
